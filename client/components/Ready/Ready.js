@@ -4,9 +4,9 @@ import PropTypes from 'prop-types'
 import './ready.scss'
 
 class Ready extends React.Component {
-  render () {
+  render() {
     return (
-      <div className="wrapper">
+      <div id="ready-component">
         <div className="ready">- {this.props.text} -</div>
       </div>
     )
