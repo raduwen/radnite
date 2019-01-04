@@ -12,16 +12,17 @@ app.get('/admin', (req, res) => {
 
 io.on('connection', (sock) => {
   sock.on('component', (command) => {
-      const commands = command.split('|');
-      const component = commands[0];
-      let props = {}
-      try {
-          props = JSON.parse(commands[1]);
-      } catch (e) {
-          console.log(e);
-      }
-      console.log(component, props);
-      io.emit('component', { component: component, props: props });
+    const commands = command.split('|');
+    const component = commands[0];
+    let props = {}
+    try {
+      props = JSON.parse(commands[1]);
+    } catch (e) {
+      console.log(commands[1]);
+      console.log(e);
+    }
+    console.log(component, props);
+    io.emit('component', { component: component, props: props });
   });
 });
 

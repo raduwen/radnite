@@ -2,7 +2,6 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-// import PropTypes from 'prop-types'
 
 import Empty from './components/Empty'
 import Ready from './components/Ready'
