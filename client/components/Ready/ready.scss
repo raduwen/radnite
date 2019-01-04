@@ -1,0 +1,44 @@
+body, div {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  font-family: "YuGothic","Yu Gothic","Meiryo","ヒラギノ角ゴ","sans-serif";
+}
+
+body {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+div {
+  color: white;
+  line-height: 1;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 960px;
+  height: 540px;
+
+  overflow: hidden;
+
+  background-color: rgba(0, 0, 0, 0.75);
+  background-image: radial-gradient(circle farthest-side, #111 25%, transparent 50%, transparent 100%);
+  background-size: 4px 4px;
+  background-position: 0 0;
+
+  outline: #000 1px solid;
+}
+
+.time {
+  font-size: 128px;
+}
+
+.ready {
+  font-size: 32px;
+}
