@@ -5392,6 +5392,11 @@ safer-eval@^1.2.3:
   dependencies:
     clones "^1.1.0"
 
+sanitize.css@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/sanitize.css/-/sanitize.css-8.0.0.tgz#b025845b772a2c0c996e62e3b2d1bbf10ca78e37"
+  integrity sha512-Ru+piIyTyioaaOj/pbJEo57lMXV70FV07AslpZ8K2Me8B2021v2Nx0Wq5hf29/fNwdjsXLdTbf4Ypmk24PnPtQ==
+
 sass@^1.15.2:
   version "1.15.2"
   resolved "https://registry.yarnpkg.com/sass/-/sass-1.15.2.tgz#539f464a61e29a9e4f560ec9dc2ccc5236db8474"
