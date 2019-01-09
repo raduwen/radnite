@@ -2,9 +2,9 @@
 
 import React from 'react'
 
+import config from '../../config'
 import 'sanitize.css'
 import './app.scss'
-
 import Wrapper from '../Wrapper'
 import Empty from '../Empty'
 import Ready from '../Ready'
@@ -22,7 +22,7 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    const socket = new WebSocket('ws://localhost:7000/component')
+    const socket = new WebSocket(`ws://${config.websocket.host}:${config.websocket.port}/component`)
     socket.onopen = () => { console.log('connected') }
     socket.onmessage = (e) => {
       const params = JSON.parse(e.data)

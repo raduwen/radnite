@@ -1,4 +1,6 @@
-var ws = new WebSocket('ws://localhost:7000/component')
+import config from '../config'
+
+var ws = new WebSocket(`ws://${config.websocket.host}:${config.websocket.port}/component`)
 ws.onmessage = (e) => {
   const json = JSON.parse(e.data)
   console.log(json.component)
