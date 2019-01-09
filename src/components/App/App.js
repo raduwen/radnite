@@ -1,3 +1,5 @@
+/* global WebSocket */
+
 import React from 'react'
 
 import 'sanitize.css'
@@ -41,9 +43,9 @@ class App extends React.Component {
   }
 
   changeComponent (name, props) {
-    const componentClass = this.components[name]
-    if (componentClass) {
-      this.setState({ component: (new componentClass(props || {})).render() })
+    const ComponentClass = this.components[name]
+    if (ComponentClass) {
+      this.setState({ component: (new ComponentClass(props || {})).render() })
     }
   }
 }
