@@ -3,14 +3,16 @@ import PropTypes from 'prop-types'
 
 import './ready.scss'
 
+import Time from '../Time'
+
 class Ready extends React.Component {
   render() {
     return (
-      <div id="ready-component">
-        <div className="ready">- {this.props.text} -</div>
+      <div id='ready-component'>
+        <div className='ready'>- {this.props.text} -</div>
+        <Time />
       </div>
     )
-    // <div className="time">{this.state.time}</div>
   }
 }
 
