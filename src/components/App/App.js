@@ -1,5 +1,3 @@
-/* global io */
-
 import React from 'react'
 
 import 'sanitize.css'
@@ -22,11 +20,12 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    const socket = io('http://localhost:7000')
-    socket.on('message', (msg) => { this.onReceiveMessage(msg) })
-    socket.on('component', (params) => {
-      this.changeComponent(params.component, params.props)
-    })
+    const socket = new WebSocket('ws://localhost:7000/component')
+    socket.onopen = () => { console.log('connected') }
+    socket.onmessage = (e) => {
+      const params = JSON.parse(e.data)
+      this.changeComponent(params.component, JSON.parse(params.props))
+    }
   }
 
   render () {
