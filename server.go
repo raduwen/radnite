@@ -11,7 +11,7 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-var addr = flag.String("addr", "localhost:7000", "http service address")
+var addr = flag.String("addr", "0.0.0.0:7000", "http service address")
 
 var upgrader = websocket.Upgrader{}
 var connections []*websocket.Conn
