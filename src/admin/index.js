@@ -1,3 +1,5 @@
+/* global WebSocket */
+
 import config from '../config'
 
 var ws = new WebSocket(`ws://${config.websocket.host}:${config.websocket.port}/component`)
@@ -8,10 +10,10 @@ ws.onmessage = (e) => {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const input_msg = document.getElementById('input_msg')
+  const inputMsg = document.getElementById('input_msg')
 
-  function setComponent(name, props = {}) {
-    input_msg.value = `${name}|${JSON.stringify(props)}`
+  function setComponent (name, props = {}) {
+    inputMsg.value = `${name}|${JSON.stringify(props)}`
     document.getElementById('message_form').submit()
   }
 
@@ -27,8 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 
   document.getElementById('message_form').addEventListener('submit', () => {
-    ws.send(input_msg.value)
-    input_msg.value = ''
+    ws.send(inputMsg.value)
+    inputMsg.value = ''
     return false
   })
 })
