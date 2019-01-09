@@ -4,9 +4,11 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "client-dev": "parcel server client/index.html",
-        "client-build": "parcel build client/index.html -d server/public",
-        "server-dev": "node server/app"
+        "preview-dev": "parcel server src/index.html       --public-url /        --out-dir public --cache-dir .cache/preview",
+        "admin-dev":   "parcel server src/admin/index.html --public-url /admin/  --out-dir public/admin --cache-dir .cache/admin",
+        "preview-build": "parcel build src/index.html       --public-url /       --out-dir public",
+        "admin-build":   "parcel build src/admin/index.html --public-url /admin/ --out-dir public/admin",
+        "build": "yarn preview-build && yarn admin-build"
     },
     "author": "",
     "license": "MIT",
@@ -26,7 +28,6 @@
         "prop-types": "^15.6.2",
         "react": "^16.7.0",
         "react-dom": "^16.7.0",
-        "sanitize.css": "^8.0.0",
-        "socket.io": "^2.2.0"
+        "sanitize.css": "^8.0.0"
     }
 }
