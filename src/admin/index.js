@@ -23,15 +23,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('ready').addEventListener('click', (e) => {
     let text = document.getElementById('input_ready_text').value
-    console.log(text)
     if (text === '') text = '準備中'
     setComponent('ready', { text })
   })
 
-  document.getElementById('end').addEventListener('click', (e) => {
-    e.preventDefault()
-    document.getElementById('input_ready_text').value = '終了しました'
-    document.getElementById('ready').click()
+  document.getElementById('end').addEventListener('click', () => {
+    setComponent('ready', { text: '終了しました' })
   })
 
   document.getElementById('message_form').addEventListener('submit', () => {
