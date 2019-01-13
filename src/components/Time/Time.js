@@ -6,10 +6,10 @@ class Time extends React.Component {
     this.state = {
       time: this.date2hms(new Date())
     }
+    this.intervalId = setInterval(() => { this.setState({ time: this.date2hms(new Date()) }) }, 1000)
   }
 
   render () {
-    setInterval(() => { this.setState({ time: this.date2hms(new Date()) }) }, 1000)
     return (
       <div id='time-component'>{this.state.time}</div>
     )
@@ -27,6 +27,11 @@ class Time extends React.Component {
   // @private
   date2hms (date) {
     return `${this.keta2(date.getHours())}:${this.keta2(date.getMinutes())}:${this.keta2(date.getSeconds())}`
+  }
+
+  componentWillUnmount () {
+    console.log(this.intervalId)
+    clearInterval(this.intervalId)
   }
 }
 
