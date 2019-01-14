@@ -31,6 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
     setComponent('ready', { text: '終了しました' })
   })
 
+  document.getElementById('subtitle').addEventListener('click', () => {
+    setComponent('subtitle', { text: document.getElementById('input_subtitle').value })
+  })
+
   document.getElementById('message_form').addEventListener('submit', () => {
     ws.send(inputMsg.value)
     inputMsg.value = ''

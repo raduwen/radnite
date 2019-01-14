@@ -8,6 +8,7 @@ import './app.scss'
 import Wrapper from '../Wrapper'
 import Empty from '../Empty'
 import Ready from '../Ready'
+import Subtitle from '../Subtitle'
 
 class App extends React.Component {
   constructor (props) {
@@ -17,7 +18,8 @@ class App extends React.Component {
     }
     this.components = {
       empty: Empty,
-      ready: Ready
+      ready: Ready,
+      subtitle: Subtitle
     }
   }
 
