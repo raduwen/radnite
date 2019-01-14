@@ -5,9 +5,20 @@ import './subtitle.scss'
 
 class Subtitle extends React.Component {
   render () {
-    return (
-      <div className='subtitle'>{this.props.text}</div>
-    )
+    const children = this.nl2br(this.props.text)
+    return <div className='subtitle'>{children}</div>
+  }
+
+  nl2br (str) {
+    const result = []
+    const lines = str.split('\n')
+    for (let i in lines) {
+      result.push(lines[i])
+      if (parseInt(i) + 1 !== lines.length) {
+        result.push(<br />)
+      }
+    }
+    return result
   }
 }
 
