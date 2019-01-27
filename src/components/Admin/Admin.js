@@ -1,8 +1,13 @@
 /* global WebSocket */
 
 import React from 'react'
+// import PropTypes from 'prop-types'
 
 import config from '../../config'
+
+import { Operator as EmptyOperator } from '../Empty'
+import { Operator as SubtitleOperator } from '../Subtitle'
+import { Operator as ReadyOperator } from '../Ready'
 
 class Admin extends React.Component {
   constructor (props) {
@@ -17,8 +22,14 @@ class Admin extends React.Component {
     this.ws = new WebSocket(`ws://${config.websocket.host}:${config.websocket.port}/component`)
     this.ws.onmessage = (e) => {
       const json = JSON.parse(e.data)
-      console.log(json.component)
-      console.log(JSON.parse(json.props))
+      const component = json.component
+      const props = JSON.parse(json.props)
+      if (component && props) {
+        const state = {}
+        // TODO: props自体を与えられるようにしたい
+        state[json.component] = props.text || ''
+        this.setState(state)
+      }
     }
 
     this.setComponent = this.setComponent.bind(this)
@@ -33,38 +44,38 @@ class Admin extends React.Component {
           return false
         }}>
           <input type="hidden" autoComplete="off" onChange={(e) => {
+            // TODO: ここいるか？？？　このinputいらなくなってるはず
             this.setState({ message: e.currentTarget.value })
           }} />
-          <div className="emtpy">
-            <button onClick={() => {
-              this.setComponent('empty')
-            }}>Emtpy</button>
-          </div>
+
+          <EmptyOperator onClick={() => { this.setComponent('empty') }} />
 
           <hr />
-          <div className="ready">
-            <input type="text" autoComplete="on" onChange={(e) => {
+          <ReadyOperator
+            text={this.state.ready}
+            onChange={(e) => {
               this.setState({ ready: e.currentTarget.value })
-            }} />
-            <button onClick={(e) => {
+            }}
+            onSetClick={(e) => {
               let text = this.state.ready
               if (text === '') text = '準備中'
               this.setComponent('ready', { text })
-            }}>Set(or Ready)</button>
-            <button onClick={() => {
+            }}
+            onEndClick={() => {
               this.setComponent('ready', { text: '終了しました' })
-            }}>End</button>
-          </div>
+            }}
+          />
 
           <hr />
-          <div className="subtitle">
-            <textarea autoComplete="off" onChange={(e) => {
+          <SubtitleOperator
+            text={this.state.subtitle}
+            onChange={(e) => {
               this.setState({ subtitle: e.currentTarget.value })
-            }} />
-            <button onClick={() => {
+            }}
+            onClick={() => {
               this.setComponent('subtitle', { text: this.state.subtitle })
-            }}>Set</button>
-          </div>
+            }}
+          />
         </form>
       </div>
     )
