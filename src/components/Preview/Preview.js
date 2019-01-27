@@ -4,13 +4,13 @@ import React from 'react'
 
 import config from '../../config'
 import 'sanitize.css'
-import './app.scss'
+import './preview.scss'
 import Wrapper from '../Wrapper'
 import Empty from '../Empty'
 import Ready from '../Ready'
 import Subtitle from '../Subtitle'
 
-class App extends React.Component {
+class Preview extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -52,4 +52,4 @@ class App extends React.Component {
   }
 }
 
-export default App
+export default Preview

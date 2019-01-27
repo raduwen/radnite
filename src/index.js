@@ -1,5 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './components/App'
+import Preview from './components/Preview'
 
-ReactDOM.render(<App />, document.getElementById('app'))
+ReactDOM.render(<Preview />, document.getElementById('preview'))
