@@ -22,6 +22,8 @@ type ComponentResponse struct {
 	Props     string `json:"props"`
 }
 
+var current_state = ComponentResponse{}
+
 func remove(conns []*websocket.Conn, search *websocket.Conn) []*websocket.Conn {
 	result := []*websocket.Conn{}
 	for _, v := range conns {
@@ -41,6 +43,14 @@ func component(w http.ResponseWriter, r *http.Request) {
 		log.Print("upgrade:", err)
 		return
 	}
+
+	b, err := json.Marshal(current_state)
+	if err != nil {
+		log.Println("marshal:", err)
+		return
+	}
+	err = c.WriteMessage(1, b)
+
 	connections = append(connections, c)
 	defer func() {
 		c.Close()
@@ -53,9 +63,9 @@ func component(w http.ResponseWriter, r *http.Request) {
 			break
 		}
 		commands := strings.Split(string(message), "|")
-		res := &ComponentResponse{Component: commands[0], Props: commands[1]}
+		current_state = ComponentResponse{Component: commands[0], Props: commands[1]}
 		log.Printf("recv: %s", message)
-		b, err := json.Marshal(res)
+		b, err := json.Marshal(current_state)
 		if err != nil {
 			log.Println("marshal:", err)
 			break
