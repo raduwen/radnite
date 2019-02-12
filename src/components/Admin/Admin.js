@@ -64,6 +64,9 @@ class Admin extends React.Component {
             onEndClick={() => {
               this.setComponent('ready', { text: '終了しました' })
             }}
+            onClearClick={() => {
+              this.setComponent('ready', { text: '' })
+            }}
           />
 
           <hr />

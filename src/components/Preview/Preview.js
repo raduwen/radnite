@@ -25,7 +25,6 @@ class Preview extends React.Component {
 
   componentDidMount () {
     const socket = new WebSocket(`ws://${config.websocket.host}:${config.websocket.port}/component`)
-    socket.onopen = () => { console.log('connected') }
     socket.onmessage = (e) => {
       const params = JSON.parse(e.data)
       this.changeComponent(params.component, JSON.parse(params.props))
@@ -38,10 +37,6 @@ class Preview extends React.Component {
         {this.state.component}
       </Wrapper>
     )
-  }
-
-  onReceiveMessage (msg) {
-    console.log(msg)
   }
 
   changeComponent (name, props) {

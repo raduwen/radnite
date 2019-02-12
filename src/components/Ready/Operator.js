@@ -6,8 +6,9 @@ class Operator extends React.Component {
     return (
       <div className="ready">
         <input type="text" autoComplete="on" onChange={this.props.onChange} value={this.props.text} />
-        <button onClick={this.props.onSetClick}>Set(or Ready)</button>
+        <button onClick={this.props.onSetClick}>Set</button>
         <button onClick={this.props.onEndClick}>End</button>
+        <button onClick={this.props.onClearClick}>Clear</button>
       </div>
     )
   }
@@ -24,7 +25,8 @@ Operator.defaultProps = {
   text: '',
   onChange: () => {},
   onSetClick: () => {},
-  onEndClick: () => {}
+  onEndClick: () => {},
+  onClearClick: () => {}
 }
 
 export default Operator
