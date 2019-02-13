@@ -4,9 +4,9 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "preview-dev": "parcel server src/index.html       --public-url /        --out-dir public --cache-dir .cache/preview",
-        "admin-dev": "parcel server src/admin/index.html --public-url /admin/  --out-dir public/admin --cache-dir .cache/admin",
-        "preview-build": "parcel build src/index.html       --public-url /       --out-dir public",
+        "preview-dev": "parcel server src/index.html      --public-url /       --out-dir public       --cache-dir .cache/preview --port 1234",
+        "admin-dev": "parcel server src/admin/index.html  --public-url /admin/ --out-dir public/admin --cache-dir .cache/admin   --port 2345",
+        "preview-build": "parcel build src/index.html     --public-url /       --out-dir public",
         "admin-build": "parcel build src/admin/index.html --public-url /admin/ --out-dir public/admin",
         "build": "yarn preview-build && yarn admin-build"
     },
