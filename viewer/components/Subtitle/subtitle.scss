@@ -1,0 +1,49 @@
+.subtitle-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  .subtitle-bar {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    // bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 2px 0px;
+
+    .subtitle-text {
+      $font-size: 16px;
+      $shadow-size: $font-size / 20;
+      $sub-shadow-size: $shadow-size / 2;
+
+      width: max-content;
+      font-size: $font-size;
+      font-weight: bold;
+      color: #fff;
+      text-shadow:
+          black $shadow-size 0px 0px, black (-$shadow-size) 0px 0px,
+          black 0px (-$shadow-size) 0px, black 0px $shadow-size 0px,
+          black $shadow-size $shadow-size 0px, black (-$shadow-size) $shadow-size 0px,
+          black $shadow-size (-$shadow-size) 0px, black (-$shadow-size) (-$shadow-size) 0px,
+          black $sub-shadow-size $shadow-size 0px, black (-$sub-shadow-size) $shadow-size 0px,
+          black $sub-shadow-size (-$shadow-size) 0px, black (-$sub-shadow-size) (-$shadow-size) 0px,
+          black $shadow-size $sub-shadow-size 0px, black (-$shadow-size) $sub-shadow-size 0px,
+          black $shadow-size (-$sub-shadow-size) 0px, black (-$shadow-size) (-$sub-shadow-size) 0px,
+          black $sub-shadow-size $sub-shadow-size 0px, black (-$sub-shadow-size) $sub-shadow-size 0px,
+          black $sub-shadow-size (-$sub-shadow-size) 0px, black (-$sub-shadow-size) (-$sub-shadow-size) 0px;
+
+      animation: subtitle-scroll 15s linear infinite;
+
+      @keyframes subtitle-scroll {
+        0% {
+          transform: translate(calc(100vw + 32px), 0);
+        }
+        100% {
+          transform: translate(calc(-100% - 32px), 0);
+        }
+      }
+    }
+  }
+}

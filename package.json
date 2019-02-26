@@ -2,13 +2,18 @@
     "name": "radnite",
     "version": "0.0.1",
     "description": "",
-    "main": "index.js",
+    "private": true,
+    "workspaces": [
+        "viewer",
+        "admin"
+    ],
     "scripts": {
-        "preview-dev": "parcel server src/index.html      --public-url /       --out-dir public       --cache-dir .cache/preview --port 1234",
-        "admin-dev": "parcel server src/admin/index.html  --public-url /admin/ --out-dir public/admin --cache-dir .cache/admin   --port 2345",
-        "preview-build": "parcel build src/index.html     --public-url /       --out-dir public",
-        "admin-build": "parcel build src/admin/index.html --public-url /admin/ --out-dir public/admin",
-        "build": "yarn preview-build && yarn admin-build"
+        "viewer-dev": "cd viewer && yarn dev",
+        "viewer-build": "cd viewer && yarn build",
+        "admin-dev": "cd admin && yarn dev",
+        "admin-build": "cd admin && yarn build",
+        "build": "yarn viewer-build && yarn admin-build",
+        "clean": "rimraf public viewer/.cache admin/.cache"
     },
     "author": "",
     "license": "MIT",
@@ -20,6 +25,7 @@
         "eslint-plugin-standard": "^4.0.0",
         "parcel-bundler": "^1.11.0",
         "prettier": "^1.15.3",
+        "rimraf": "^2.6.3",
         "sass": "^1.15.2",
         "standard": "^12.0.1"
     },
