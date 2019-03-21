@@ -14,8 +14,8 @@ class Admin extends React.Component {
     super(props)
 
     this.state = {
-      ready: '',
-      subtitle: ''
+      ready: { text: '' },
+      subtitle: { text: '' }
     }
 
     this.ws = new WebSocket(`ws://${config.websocket.host}:${config.websocket.port}/component`)
@@ -25,8 +25,7 @@ class Admin extends React.Component {
       const props = JSON.parse(json.props)
       if (component && props) {
         const state = {}
-        // TODO: props自体を与えられるようにしたい
-        state[json.component] = props.text || ''
+        state[json.component] = props
         this.setState(state)
       }
     }
@@ -46,12 +45,12 @@ class Admin extends React.Component {
 
           <hr />
           <ReadyOperator
-            text={this.state.ready}
+            text={this.state.ready.text}
             onChange={(e) => {
-              this.setState({ ready: e.currentTarget.value })
+              this.setState({ ready: { text: e.currentTarget.value } })
             }}
             onSetClick={(e) => {
-              let text = this.state.ready
+              let text = this.state.ready.text
               if (text === '') text = '準備中'
               this.setComponent('ready', { text })
             }}
@@ -65,12 +64,12 @@ class Admin extends React.Component {
 
           <hr />
           <SubtitleOperator
-            text={this.state.subtitle}
+            text={this.state.subtitle.text}
             onChange={(e) => {
-              this.setState({ subtitle: e.currentTarget.value })
+              this.setState({ subtitle: { text: e.currentTarget.value } })
             }}
             onClick={() => {
-              this.setComponent('subtitle', { text: this.state.subtitle })
+              this.setComponent('subtitle', { text: this.state.subtitle.text })
             }}
           />
         </form>
