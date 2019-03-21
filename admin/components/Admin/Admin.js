@@ -5,9 +5,9 @@ import React from 'react'
 
 import config from '../../config'
 
-import { Operator as EmptyOperator } from '../Empty'
-import { Operator as SubtitleOperator } from '../Subtitle'
-import { Operator as ReadyOperator } from '../Ready'
+import { default as EmptyOperator } from '../Empty'
+import { default as SubtitleOperator } from '../Subtitle'
+import { default as ReadyOperator } from '../Ready'
 
 class Admin extends React.Component {
   constructor (props) {
