@@ -30,7 +30,6 @@ class Time extends React.Component {
   }
 
   componentWillUnmount () {
-    console.log(this.intervalId)
     clearInterval(this.intervalId)
   }
 }
