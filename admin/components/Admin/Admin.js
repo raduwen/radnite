@@ -5,9 +5,9 @@ import React from 'react'
 
 import config from '../../config'
 
-import { default as EmptyOperator } from '../Empty'
-import { default as SubtitleOperator } from '../Subtitle'
-import { default as ReadyOperator } from '../Ready'
+import EmptyOperator from '../Empty'
+import SubtitleOperator from '../Subtitle'
+import ReadyOperator from '../Ready'
 
 class Admin extends React.Component {
   constructor (props) {
@@ -39,11 +39,11 @@ class Admin extends React.Component {
   render () {
     return (
       <div>
-        <form action="#" onSubmit={() => {
+        <form action='#' onSubmit={() => {
           this.publishMessage()
           return false
         }}>
-          <input type="hidden" autoComplete="off" onChange={(e) => {
+          <input type='hidden' autoComplete='off' onChange={(e) => {
             // TODO: ここいるか？？？　このinputいらなくなってるはず
             this.setState({ message: e.currentTarget.value })
           }} />
@@ -93,7 +93,7 @@ class Admin extends React.Component {
     if (this.messageIsValid()) this.ws.send(this.state.message)
   }
 
-  messageIsValid() {
+  messageIsValid () {
     const msg = this.state.message
     return !(
       msg === '' ||
