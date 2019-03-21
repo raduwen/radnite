@@ -14,7 +14,6 @@ class Admin extends React.Component {
     super(props)
 
     this.state = {
-      message: '',
       ready: '',
       subtitle: ''
     }
@@ -43,11 +42,6 @@ class Admin extends React.Component {
           this.publishMessage()
           return false
         }}>
-          <input type='hidden' autoComplete='off' onChange={(e) => {
-            // TODO: ここいるか？？？　このinputいらなくなってるはず
-            this.setState({ message: e.currentTarget.value })
-          }} />
-
           <EmptyOperator onClick={() => { this.setComponent('empty') }} />
 
           <hr />
@@ -85,20 +79,19 @@ class Admin extends React.Component {
   }
 
   setComponent (name, props = {}) {
-    this.setState({ message: `${name}|${JSON.stringify(props)}` })
-    this.publishMessage()
+    const message = `${name}|${JSON.stringify(props)}`
+    this.publishMessage(message)
   }
 
-  publishMessage () {
-    if (this.messageIsValid()) this.ws.send(this.state.message)
+  publishMessage (message) {
+    if (this.isValidMessage(message)) this.ws.send(message)
   }
 
-  messageIsValid () {
-    const msg = this.state.message
+  isValidMessage (message) {
     return !(
-      msg === '' ||
-      msg === null ||
-      typeof msg === 'undefined'
+      message === '' ||
+      message === null ||
+      typeof message === 'undefined'
     )
   }
 }
