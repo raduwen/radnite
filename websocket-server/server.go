@@ -15,14 +15,14 @@ var addr = flag.String("addr", "0.0.0.0:7000", "http service address")
 
 var upgrader = websocket.Upgrader{}
 var connections []*websocket.Conn
-var remove_list []*websocket.Conn
+var removeList []*websocket.Conn
 
-type ComponentResponse struct {
+type componentResponse struct {
 	Component string `json:"component"`
 	Props     string `json:"props"`
 }
 
-var current_state = ComponentResponse{}
+var currentState = componentResponse{}
 
 func remove(conns []*websocket.Conn, search *websocket.Conn) []*websocket.Conn {
 	result := []*websocket.Conn{}
@@ -44,7 +44,7 @@ func component(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	b, err := json.Marshal(current_state)
+	b, err := json.Marshal(currentState)
 	if err != nil {
 		log.Println("marshal:", err)
 		return
@@ -63,24 +63,24 @@ func component(w http.ResponseWriter, r *http.Request) {
 			break
 		}
 		commands := strings.Split(string(message), "|")
-		current_state = ComponentResponse{Component: commands[0], Props: commands[1]}
+		currentState = componentResponse{Component: commands[0], Props: commands[1]}
 		log.Printf("recv: %s", message)
-		b, err := json.Marshal(current_state)
+		b, err := json.Marshal(currentState)
 		if err != nil {
 			log.Println("marshal:", err)
 			break
 		}
 
 		log.Printf("connections: %d", len(connections))
-		remove_list = nil
+		removeList = nil
 		for _, conn := range connections {
 			err = conn.WriteMessage(mt, b)
 			if err != nil {
-				remove_list = append(remove_list, conn)
+				removeList = append(removeList, conn)
 				log.Println("write:", err)
 			}
 		}
-		for _, conn := range remove_list {
+		for _, conn := range removeList {
 			conn.Close()
 			connections = remove(connections, conn)
 		}
