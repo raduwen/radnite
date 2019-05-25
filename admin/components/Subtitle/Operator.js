@@ -5,9 +5,18 @@ class Operator extends React.Component {
   render() {
     return (
       <div className="subtitle">
-        <label>scroll <input name="scroll" type="checkbox" onChange={this.props.onChange} checked={this.props.scroll} /></label>
-        <textarea name="text" autoComplete="off" value={this.props.text} onChange={this.props.onChange} />
-        <button onClick={this.props.onClick}>Set</button>
+        <div>
+          <label>
+            <input name="scroll" type="checkbox" onChange={this.props.onChange} checked={this.props.scroll} />
+            Scroll
+          </label>
+        </div>
+        <div>
+          <textarea name="text" autoComplete="off" value={this.props.text} onChange={this.props.onChange} />
+        </div>
+        <div>
+          <button onClick={this.props.onClick}>Set</button>
+        </div>
       </div>
     )
   }
