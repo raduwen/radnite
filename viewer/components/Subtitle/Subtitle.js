@@ -5,11 +5,17 @@ import './subtitle.scss'
 
 class Subtitle extends React.Component {
   render () {
-    const text = this.nl2sp(this.props.text)
+    let text = this.props.scroll ? this.nl2sp(this.props.text) : this.nl2br(this.props.text)
+    const textClasses = ['subtitle-text']
+
+    if (this.props.scroll) {
+      textClasses.push('scroll')
+    }
+
     return (
       <div className='subtitle-wrapper'>
         <div className='subtitle-bar'>
-          <div className='subtitle-text'>{text}</div>
+          <div className={textClasses.join(' ')}>{text}</div>
         </div>
       </div>
     )
@@ -17,6 +23,18 @@ class Subtitle extends React.Component {
 
   nl2sp (str) {
     return str.split('\n').join('　')
+  }
+
+  nl2br (str) {
+    const contents = []
+    const lines = str.split('\n')
+
+    for (let i = 0; i < lines.length; i++) {
+      contents.push(lines[i])
+      if (i !== lines.length - 1) contents.push(<br />)
+    }
+
+    return contents
   }
 
   /**
@@ -36,11 +54,13 @@ class Subtitle extends React.Component {
 }
 
 Subtitle.propTypes = {
-  text: PropTypes.string
+  text: PropTypes.string,
+  scroll: PropTypes.bool
 }
 
 Subtitle.defaultProps = {
-  text: ''
+  text: '',
+  scroll: 'off'
 }
 
 export default Subtitle

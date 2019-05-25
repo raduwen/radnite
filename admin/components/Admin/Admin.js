@@ -15,7 +15,7 @@ class Admin extends React.Component {
 
     this.state = {
       ready: { text: '' },
-      subtitle: { text: '' }
+      subtitle: { text: '', scorll: false }
     }
 
     this.ws = new WebSocket(`ws://${config.websocket.host}:${config.websocket.port}/component`)
@@ -65,11 +65,19 @@ class Admin extends React.Component {
           <hr />
           <SubtitleOperator
             text={this.state.subtitle.text}
+            scroll={this.state.subtitle.scroll}
             onChange={(e) => {
-              this.setState({ subtitle: { text: e.currentTarget.value } })
+              const val = this.state.subtitle
+              if (e.currentTarget.type === 'checkbox') {
+                val[e.currentTarget.name] = e.currentTarget.checked
+              } else {
+                val[e.currentTarget.name] = e.currentTarget.value
+              }
+              this.setState({ subtitle: val })
             }}
-            onClick={() => {
-              this.setComponent('subtitle', { text: this.state.subtitle.text })
+            onClick={(e) => {
+              e.preventDefault()
+              this.setComponent('subtitle', this.state.subtitle)
             }}
           />
         </form>

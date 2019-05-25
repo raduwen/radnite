@@ -5,7 +5,8 @@ class Operator extends React.Component {
   render() {
     return (
       <div className="subtitle">
-        <textarea autoComplete="off" value={this.props.text} onChange={this.props.onChange} />
+        <label>scroll <input name="scroll" type="checkbox" onChange={this.props.onChange} checked={this.props.scroll} /></label>
+        <textarea name="text" autoComplete="off" value={this.props.text} onChange={this.props.onChange} />
         <button onClick={this.props.onClick}>Set</button>
       </div>
     )
@@ -14,12 +15,14 @@ class Operator extends React.Component {
 
 Operator.propTypes = {
   text: PropTypes.string,
+  scroll: PropTypes.bool,
   onChange: PropTypes.func,
   onClick: PropTypes.func
 }
 
 Operator.defaultProps = {
   text: '',
+  scroll: false,
   onChange: () => {},
   onClick: () => {}
 }

@@ -34,14 +34,16 @@
           black $sub-shadow-size $sub-shadow-size 0px, black (-$sub-shadow-size) $sub-shadow-size 0px,
           black $sub-shadow-size (-$sub-shadow-size) 0px, black (-$sub-shadow-size) (-$sub-shadow-size) 0px;
 
-      animation: subtitle-scroll 15s linear infinite;
+      &.scroll {
+        animation: subtitle-scroll 15s linear infinite;
 
-      @keyframes subtitle-scroll {
-        0% {
-          transform: translate(calc(100vw + 32px), 0);
-        }
-        100% {
-          transform: translate(calc(-100% - 32px), 0);
+        @keyframes subtitle-scroll {
+          0% {
+            transform: translate(calc(100vw + 32px), 0);
+          }
+          100% {
+            transform: translate(calc(-100% - 32px), 0);
+          }
         }
       }
     }
