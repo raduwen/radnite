@@ -36,52 +36,50 @@ class Admin extends React.Component {
 
   render () {
     return (
-      <div>
-        <form action='#' onSubmit={() => {
-          this.publishMessage()
-          return false
-        }}>
-          <EmptyOperator onClick={() => { this.setComponent('empty') }} />
+      <form action='#' onSubmit={() => {
+        this.publishMessage()
+        return false
+      }}>
+        <EmptyOperator onClick={() => { this.setComponent('empty') }} />
 
-          <hr />
-          <ReadyOperator
-            text={this.state.ready.text}
-            onChange={(e) => {
-              this.setState({ ready: { text: e.currentTarget.value } })
-            }}
-            onSetClick={(e) => {
-              let text = this.state.ready.text
-              if (text === '') text = '準備中'
-              this.setComponent('ready', { text })
-            }}
-            onEndClick={() => {
-              this.setComponent('ready', { text: '終了しました' })
-            }}
-            onClearClick={() => {
-              this.setComponent('ready', { text: '' })
-            }}
-          />
+        <hr />
+        <ReadyOperator
+          text={this.state.ready.text}
+          onChange={(e) => {
+            this.setState({ ready: { text: e.currentTarget.value } })
+          }}
+          onSetClick={(e) => {
+            let text = this.state.ready.text
+            if (text === '') text = '準備中'
+            this.setComponent('ready', { text })
+          }}
+          onEndClick={() => {
+            this.setComponent('ready', { text: '終了しました' })
+          }}
+          onClearClick={() => {
+            this.setComponent('ready', { text: '' })
+          }}
+        />
 
-          <hr />
-          <SubtitleOperator
-            text={this.state.subtitle.text}
-            scroll={this.state.subtitle.scroll}
-            onChange={(e) => {
-              const val = this.state.subtitle
-              if (e.currentTarget.type === 'checkbox') {
-                val[e.currentTarget.name] = e.currentTarget.checked
-              } else {
-                val[e.currentTarget.name] = e.currentTarget.value
-              }
-              this.setState({ subtitle: val })
-            }}
-            onClick={(e) => {
-              e.preventDefault()
-              this.setComponent('subtitle', this.state.subtitle)
-            }}
-          />
-        </form>
-      </div>
+        <hr />
+        <SubtitleOperator
+          text={this.state.subtitle.text}
+          scroll={this.state.subtitle.scroll}
+          onChange={(e) => {
+            const val = this.state.subtitle
+            if (e.currentTarget.type === 'checkbox') {
+              val[e.currentTarget.name] = e.currentTarget.checked
+            } else {
+              val[e.currentTarget.name] = e.currentTarget.value
+            }
+            this.setState({ subtitle: val })
+          }}
+          onClick={(e) => {
+            e.preventDefault()
+            this.setComponent('subtitle', this.state.subtitle)
+          }}
+        />
+      </form>
     )
   }
 
