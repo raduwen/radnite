@@ -5,16 +5,19 @@ import './subtitle.scss'
 
 class Subtitle extends React.Component {
   render () {
-    let text = this.props.scroll ? this.nl2sp(this.props.text) : this.nl2br(this.props.text)
+    const barClasses = ['subtitle-bar']
     const textClasses = ['subtitle-text']
 
     if (this.props.scroll) {
       textClasses.push('scroll')
+      barClasses.push('black')
     }
+
+    let text = this.props.scroll ? this.nl2sp(this.props.text) : this.nl2br(this.props.text)
 
     return (
       <div className='subtitle-wrapper'>
-        <div className='subtitle-bar'>
+        <div className={barClasses.join(' ')}>
           <div className={textClasses.join(' ')}>{text}</div>
         </div>
       </div>

@@ -10,14 +10,19 @@
     left: 0;
     top: 0;
     // bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
     padding: 2px 0px;
+
+    &.black {
+      background-color: rgba(0, 0, 0, 0.5);
+    }
 
     .subtitle-text {
       $font-size: 16px;
       $shadow-size: $font-size / 20;
       $sub-shadow-size: $shadow-size / 2;
 
+      margin-top: $font-size / 2;
+      margin-left: $font-size / 2;
       width: max-content;
       font-size: $font-size;
       font-weight: bold;
@@ -35,6 +40,7 @@
           black $sub-shadow-size (-$sub-shadow-size) 0px, black (-$sub-shadow-size) (-$sub-shadow-size) 0px;
 
       &.scroll {
+        margin: 0;
         animation: subtitle-scroll 15s linear infinite;
 
         @keyframes subtitle-scroll {
