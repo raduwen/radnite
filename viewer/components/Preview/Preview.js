@@ -17,6 +17,7 @@ class Preview extends React.Component {
     this.state = {
       component: <Empty />
     }
+    this.namespace = 'test'
     this.components = {
       empty: Empty,
       ready: Ready,
@@ -28,11 +29,9 @@ class Preview extends React.Component {
     this.firebase = firebase.initializeApp(config.firebase)
     this.database = firebase.database()
 
-    this.database.ref('test').on('value', (snap) => {
-      const data = snap.val().split('|')
-      const component = data[0]
-      const props = JSON.parse(data[1])
-      this.changeComponent(component, props)
+    this.database.ref(this.namespace).on('value', (snap) => {
+      const data = snap.val()
+      this.changeComponent(data.component, data.params)
     })
   }
 

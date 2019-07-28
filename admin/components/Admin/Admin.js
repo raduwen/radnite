@@ -19,18 +19,21 @@ class Admin extends React.Component {
       subtitle: { text: '', scorll: false }
     }
 
+    this.namespace = 'test'
+
     this.state = this.initialState
 
     this.firebase = firebase.initializeApp(config.firebase)
     this.database = firebase.database()
 
-    this.database.ref('test').on('value', (snap) => {
-      const data = snap.val().split('|')
-      const component = data[0]
-      const props = JSON.parse(data[1])
+    // TODO: testをユーザー毎に切り替える
+    this.database.ref(this.namespace).on('value', (snap) => {
+      const data = snap.val()
+      const component = data.comopnent
+      const params = data.params
       if (component && props) {
         const state = {}
-        state[component] = props
+        state[component] = params
         this.reset()
         this.setState(state)
       }
@@ -95,11 +98,14 @@ class Admin extends React.Component {
 
   setComponent (name, props = {}) {
     const message = `${name}|${JSON.stringify(props)}`
-    this.publishMessage(message)
+    this.publishMessage({
+      component: name,
+      params: props
+    })
   }
 
   publishMessage (message) {
-    if (this.isValidMessage(message)) this.database.ref('test').set(message)
+    if (this.isValidMessage(message)) this.database.ref(this.namespace).set(message)
   }
 
   isValidMessage (message) {
