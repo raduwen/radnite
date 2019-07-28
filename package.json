@@ -23,6 +23,8 @@
         "eslint-plugin-node": "^8.0.0",
         "eslint-plugin-promise": "^4.0.1",
         "eslint-plugin-standard": "^4.0.0",
+        "firebase-cli": "^1.2.0",
+        "firebase-tools": "^7.2.1",
         "parcel-bundler": "^1.11.0",
         "prettier": "^1.15.3",
         "rimraf": "^2.6.3",
@@ -31,6 +33,7 @@
     },
     "dependencies": {
         "express": "^4.17.1",
+        "firebase": "^6.3.3",
         "prop-types": "^15.7.2",
         "react": "^16.8.6",
         "react-dom": "^16.8.6",

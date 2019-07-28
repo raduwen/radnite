@@ -1,5 +1,3 @@
-/* global WebSocket */
-
 import React from 'react'
 
 import config from '../../config'
@@ -9,6 +7,9 @@ import Wrapper from '../Wrapper'
 import Empty from '../Empty'
 import Ready from '../Ready'
 import Subtitle from '../Subtitle'
+
+import * as firebase from 'firebase/app'
+import 'firebase/database'
 
 class Preview extends React.Component {
   constructor (props) {
@@ -24,11 +25,15 @@ class Preview extends React.Component {
   }
 
   componentDidMount () {
-    const socket = new WebSocket(`ws://${config.websocket.host}:${config.websocket.port}/component`)
-    socket.onmessage = (e) => {
-      const params = JSON.parse(e.data)
-      this.changeComponent(params.component, JSON.parse(params.props))
-    }
+    this.firebase = firebase.initializeApp(config.firebase)
+    this.database = firebase.database()
+
+    this.database.ref('test').on('value', (snap) => {
+      const data = snap.val().split('|')
+      const component = data[0]
+      const props = JSON.parse(data[1])
+      this.changeComponent(component, props)
+    })
   }
 
   render () {
