@@ -29,13 +29,13 @@ class Admin extends React.Component {
     // TODO: testをユーザー毎に切り替える
     this.database.ref(this.namespace).on('value', (snap) => {
       const data = snap.val()
-      const component = data.comopnent
-      const params = data.params
-      if (component && props) {
+      const component = data.component
+      if (component) {
+        const params = data.params
         const state = {}
         state[component] = params
         this.reset()
-        this.setState(state)
+        this.setState(data)
       }
     })
 
