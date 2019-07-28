@@ -3,3 +3,6 @@ node_modules
 public
 
 *.swp
+
+admin/config.js
+viewer/config.js
