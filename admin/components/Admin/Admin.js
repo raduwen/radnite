@@ -1,5 +1,3 @@
-/* global WebSocket */
-
 import React from 'react'
 // import PropTypes from 'prop-types'
 
@@ -9,38 +7,51 @@ import EmptyOperator from '../Empty'
 import SubtitleOperator from '../Subtitle'
 import ReadyOperator from '../Ready'
 
+import * as firebase from 'firebase/app'
+import 'firebase/database'
+
 class Admin extends React.Component {
   constructor (props) {
     super(props)
 
-    this.state = {
+    this.initialState = {
       ready: { text: '' },
       subtitle: { text: '', scorll: false }
     }
 
-    this.ws = new WebSocket(`ws://${config.websocket.host}:${config.websocket.port}/component`)
-    this.ws.onmessage = (e) => {
-      const json = JSON.parse(e.data)
-      const component = json.component
-      const props = JSON.parse(json.props)
+    this.state = this.initialState
+
+    this.firebase = firebase.initializeApp(config.firebase)
+    this.database = firebase.database()
+
+    this.database.ref('test').on('value', (snap) => {
+      const data = snap.val().split('|')
+      const component = data[0]
+      const props = JSON.parse(data[1])
       if (component && props) {
         const state = {}
-        state[json.component] = props
+        state[component] = props
+        this.reset()
         this.setState(state)
       }
-    }
+    })
 
     this.setComponent = this.setComponent.bind(this)
     this.publishMessage = this.publishMessage.bind(this)
   }
 
+  reset () {
+    this.setState(this.initialState)
+  }
+
   render () {
     return (
-      <form action='#' onSubmit={() => {
+      <form action='#' onSubmit={(e) => {
+        e.preventDefault()
         this.publishMessage()
         return false
       }}>
-        <EmptyOperator onClick={() => { this.setComponent('empty') }} />
+        <EmptyOperator onClick={(e) => { this.setComponent('empty') }} />
 
         <hr />
         <ReadyOperator
@@ -53,10 +64,10 @@ class Admin extends React.Component {
             if (text === '') text = '準備中'
             this.setComponent('ready', { text })
           }}
-          onEndClick={() => {
+          onEndClick={(e) => {
             this.setComponent('ready', { text: '終了しました' })
           }}
-          onClearClick={() => {
+          onClearClick={(e) => {
             this.setComponent('ready', { text: '' })
           }}
         />
@@ -75,7 +86,6 @@ class Admin extends React.Component {
             this.setState({ subtitle: val })
           }}
           onClick={(e) => {
-            e.preventDefault()
             this.setComponent('subtitle', this.state.subtitle)
           }}
         />
@@ -89,7 +99,7 @@ class Admin extends React.Component {
   }
 
   publishMessage (message) {
-    if (this.isValidMessage(message)) this.ws.send(message)
+    if (this.isValidMessage(message)) this.database.ref('test').set(message)
   }
 
   isValidMessage (message) {
