@@ -2,4 +2,6 @@
 
 class Room < ApplicationRecord
   validates :title, presence: true
+
+  # TODO: components mapping -> XxxComponent class
 end

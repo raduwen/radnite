@@ -28,7 +28,7 @@ module Admin
 
     def update
       if @room.update(room_params)
-        redirect_to action: :show
+        redirect_to action: :edit
       else
         render :edit
       end
@@ -44,7 +44,8 @@ module Admin
     def room_params
       params.require(:room).permit(
         :id,
-        :title
+        :title,
+        :components
       )
     end
 

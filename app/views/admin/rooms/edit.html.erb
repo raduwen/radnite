@@ -3,6 +3,9 @@
 <section>
   <%= form_for @room, url: admin_room_path(@room) do |f| %>
     <%= f.text_field :title %>
+    <%= f.text_area :components %>
     <%= f.submit %>
   <%- end %>
 </section>
+
+<iframe class="preview" src="<%= viewer_room_path(@room) %>" width="100%"></iframe>
