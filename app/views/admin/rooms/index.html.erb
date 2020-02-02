@@ -1,0 +1,26 @@
+<h1>Rooms</h1>
+
+<aside>
+  <%= link_to 'New', new_admin_room_path %>
+</aside>
+
+<section>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%- @rooms.each do |room| %>
+        <tr>
+          <td><%= room.id %></td>
+          <td><%= room.title %></td>
+          <td><%= link_to 'Edit', edit_admin_room_path(room) %>
+        </tr>
+      <%- end %>
+    </tbody>
+  </table>
+</section>
